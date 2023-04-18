@@ -1,4 +1,4 @@
-package org.huanyuan.easyobj.calculator.core.demo.humanrelation;
+package org.huanyuan.easyobj.calculator.demo.humanrelation;
 
 import com.google.common.collect.Lists;
 import org.huanyuan.easyobj.calculator.core.api.DefaultRule;

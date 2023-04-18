@@ -1,8 +1,6 @@
 package org.huanyuan.easyobj.calculator.core.api;
 
 import com.google.common.collect.ImmutableMap;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -11,8 +9,7 @@ import java.io.Serializable;
  * @Description
  * @Date 2023-04-13 16:48
  */
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Step<T extends Condition> implements Serializable {
 
     private static final long serialVersionUID = 7170415206946278291L;

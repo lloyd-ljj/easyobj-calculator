@@ -1,4 +1,4 @@
-package org.huanyuan.easyobj.calculator.core.demo.calendar;
+package org.huanyuan.easyobj.calculator.demo.calendar;
 
 import cn.hutool.core.lang.Assert;
 import com.google.common.collect.Lists;

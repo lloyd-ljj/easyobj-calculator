@@ -1,4 +1,4 @@
-package org.huanyuan.easyobj.calculator.core.demo.humanrelation;
+package org.huanyuan.easyobj.calculator.demo.humanrelation;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

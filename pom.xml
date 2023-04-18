@@ -12,6 +12,7 @@
 
     <modules>
         <module>easyobj-calculator-core</module>
+        <module>easyobj-calculator-demo</module>
     </modules>
 
     <developers>
@@ -27,20 +28,14 @@
         <java.version>1.8</java.version>
         <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <lombok.version>1.18.22</lombok.version>
         <guava.version>30.1.1-jre</guava.version>
         <fastjson2.version>2.0.19</fastjson2.version>
         <hutool-all.version>5.8.4</hutool-all.version>
+        <fastjson2.version>2.0.19</fastjson2.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
@@ -52,6 +47,13 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool-all.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

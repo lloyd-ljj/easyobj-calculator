@@ -1,7 +1,6 @@
 package org.huanyuan.easyobj.calculator.core.api;
 
 import com.google.common.collect.Lists;
-import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
  * @Description
  * @Date 2023-04-13 15:43
  */
-@Data
 public class Target<T> implements Serializable {
 
     private static final long serialVersionUID = -6155751185855179626L;
@@ -23,6 +21,14 @@ public class Target<T> implements Serializable {
     }
 
     public Target(List<T> targetList) {
+        this.targetList = targetList;
+    }
+
+    public List<T> getTargetList() {
+        return targetList;
+    }
+
+    public void setTargetList(List<T> targetList) {
         this.targetList = targetList;
     }
 }

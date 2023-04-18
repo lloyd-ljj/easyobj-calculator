@@ -1,7 +1,6 @@
 package org.huanyuan.easyobj.calculator.core.api;
 
 import com.google.common.collect.Lists;
-import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,11 +10,10 @@ import java.util.List;
  * @Description
  * @Date 2023-04-13 15:43
  */
-@Data
 public class Result<T> implements Serializable {
 
     private static final long serialVersionUID = -460089896446118266L;
-    
+
     private List<T> resultList;
 
     public Result(T result) {
@@ -26,4 +24,11 @@ public class Result<T> implements Serializable {
         this.resultList = result;
     }
 
+    public List<T> getResultList() {
+        return resultList;
+    }
+
+    public void setResultList(List<T> resultList) {
+        this.resultList = resultList;
+    }
 }

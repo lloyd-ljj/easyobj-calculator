@@ -1,11 +1,7 @@
-package org.huanyuan.easyobj.calculator.core.demo.humanrelation;
+package org.huanyuan.easyobj.calculator.demo.humanrelation;
 
-import cn.hutool.core.lang.hash.Hash;
 import com.google.common.collect.ImmutableMap;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
-import javax.annotation.PostConstruct;
 import java.util.Map;
 
 /**
