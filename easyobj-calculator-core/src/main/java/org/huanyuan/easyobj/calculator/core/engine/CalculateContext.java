@@ -26,4 +26,5 @@ public class CalculateContext<T, U, V extends Condition> {
     private List<Step<V>> stepList;
 
     private int currentStep;
+
 }

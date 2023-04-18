@@ -56,4 +56,9 @@ public abstract class AbstractRule<T, U, V extends Condition> implements Rule<T,
     public int getPriority() {
         return priority;
     }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
 }

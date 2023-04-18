@@ -5,7 +5,6 @@ import org.huanyuan.easyobj.calculator.core.api.DefaultRule;
 import org.huanyuan.easyobj.calculator.core.api.Result;
 import org.huanyuan.easyobj.calculator.core.api.SimpleCondition;
 import org.huanyuan.easyobj.calculator.core.api.Step;
-import org.huanyuan.easyobj.calculator.core.builder.RuleBuilder;
 import org.huanyuan.easyobj.calculator.core.engine.DefaultRuleEngine;
 
 import java.util.*;
@@ -32,7 +31,7 @@ public class RelationCalculator {
 
     private static DefaultRuleEngine initEngine() {
 
-        DefaultRule<User, User, SimpleCondition> LDRule = new RuleBuilder<User, User, SimpleCondition>()
+        DefaultRule<User, User, SimpleCondition> LDRule = DefaultRule.<User, User, SimpleCondition>builder()
                 .name("leader rule")
                 .type(RELATION_TYPE)
                 .description("relation calculator")
@@ -43,7 +42,7 @@ public class RelationCalculator {
                 })
                 .build();
 
-        DefaultRule<User, Organization, SimpleCondition> OrgRule = new RuleBuilder<User, Organization, SimpleCondition>()
+        DefaultRule<User, Organization, SimpleCondition> OrgRule = DefaultRule.<User, Organization, SimpleCondition>builder()
                 .name("organization rule")
                 .type(RELATION_TYPE)
                 .description("relation calculator")
@@ -54,7 +53,7 @@ public class RelationCalculator {
                 })
                 .build();
 
-        DefaultRule<Organization, User, SimpleCondition> OrgLRule = new RuleBuilder<Organization, User, SimpleCondition>()
+        DefaultRule<Organization, User, SimpleCondition> OrgLRule = DefaultRule.<Organization, User, SimpleCondition>builder()
                 .name("organization leader rule")
                 .type(RELATION_TYPE)
                 .description("relation calculator")
@@ -65,7 +64,7 @@ public class RelationCalculator {
                 })
                 .build();
 
-        DefaultRule<User, User, SimpleCondition> MentorRule = new RuleBuilder<User, User, SimpleCondition>()
+        DefaultRule<User, User, SimpleCondition> MentorRule = DefaultRule.<User, User, SimpleCondition>builder()
                 .name("mentor rule")
                 .type(RELATION_TYPE)
                 .description("relation calculator")

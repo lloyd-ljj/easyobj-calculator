@@ -25,4 +25,6 @@ public interface Rule<T, U, V extends Condition> extends Comparable<Rule<T, U, V
 
     String getName();
 
+    String getDescription();
+
 }

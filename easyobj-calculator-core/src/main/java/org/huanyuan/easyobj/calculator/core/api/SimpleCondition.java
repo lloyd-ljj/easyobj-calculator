@@ -9,6 +9,8 @@ import org.huanyuan.easyobj.calculator.core.common.R;
  */
 public class SimpleCondition extends Condition {
 
+    private static final long serialVersionUID = 1284537750158325399L;
+
     private static final String DEFAULT_CONTENT_NAME = "DEFAULT_CONTENT_NAME";
 
     public SimpleCondition(String condition) {

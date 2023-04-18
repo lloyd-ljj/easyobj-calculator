@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * @Author lianjunjie
  * @Description
@@ -11,7 +13,9 @@ import lombok.NoArgsConstructor;
  */
 @AllArgsConstructor
 @NoArgsConstructor
-public class Step<T extends Condition> {
+public class Step<T extends Condition> implements Serializable {
+
+    private static final long serialVersionUID = 7170415206946278291L;
 
     private String type;
 
@@ -65,7 +69,6 @@ public class Step<T extends Condition> {
         public Step<T> build() {
             return new Step<T>(this);
         }
-
 
     }
 

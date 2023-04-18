@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import org.huanyuan.easyobj.calculator.core.api.DefaultRule;
 import org.huanyuan.easyobj.calculator.core.api.SimpleCondition;
 import org.huanyuan.easyobj.calculator.core.api.Step;
-import org.huanyuan.easyobj.calculator.core.builder.RuleBuilder;
 import org.huanyuan.easyobj.calculator.core.engine.DefaultRuleEngine;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class CalendarCalculator {
     private static final String CALENDAR_TYPE = "CALENDAR";
 
     public static void main(String[] args) {
-        DefaultRule<Calendar, Calendar, SimpleCondition> dayPlusRule = new RuleBuilder<Calendar, Calendar, SimpleCondition>()
+        DefaultRule<Calendar, Calendar, SimpleCondition> dayPlusRule = DefaultRule.<Calendar, Calendar, SimpleCondition>builder()
                 .name("day plus rule")
                 .type(CALENDAR_TYPE)
                 .description("calendar calculator")
@@ -34,7 +33,7 @@ public class CalendarCalculator {
                 })
                 .build();
 
-        DefaultRule<Calendar, Calendar, SimpleCondition> dayMinusRule = new RuleBuilder<Calendar, Calendar, SimpleCondition>()
+        DefaultRule<Calendar, Calendar, SimpleCondition> dayMinusRule = DefaultRule.<Calendar, Calendar, SimpleCondition>builder()
                 .name("day minus rule")
                 .type(CALENDAR_TYPE)
                 .description("calendar calculator")
