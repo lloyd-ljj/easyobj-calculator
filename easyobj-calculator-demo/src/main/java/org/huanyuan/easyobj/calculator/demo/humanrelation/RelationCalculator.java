@@ -1,10 +1,12 @@
 package org.huanyuan.easyobj.calculator.demo.humanrelation;
 
+import cn.hutool.core.lang.Assert;
 import com.google.common.collect.Lists;
 import org.huanyuan.easyobj.calculator.core.api.DefaultRule;
 import org.huanyuan.easyobj.calculator.core.api.Result;
 import org.huanyuan.easyobj.calculator.core.api.SimpleCondition;
 import org.huanyuan.easyobj.calculator.core.api.Step;
+import org.huanyuan.easyobj.calculator.core.constant.CalculateOperateEnum;
 import org.huanyuan.easyobj.calculator.core.engine.DefaultRuleEngine;
 
 import java.util.*;
@@ -19,14 +21,45 @@ public class RelationCalculator {
     private static final String RELATION_TYPE = "RELATION_TYPE";
 
     public static void main(String[] args) {
+        // demo1 for condition without result operate
         DefaultRuleEngine engine = initEngine();
         String conditionStr = "LD;MT;O;OL";
         List<String> strList = Arrays.asList(conditionStr.split(RelationConstant.STEP_SEPERATOR));
         ArrayList<Step<SimpleCondition>> conditionList = Lists.newArrayList();
         strList.forEach(str -> conditionList.add(
-                Step.<SimpleCondition>builder().type(RELATION_TYPE).condition(new SimpleCondition(str)).build())
+                Step.<SimpleCondition>builder()
+                        .condition(Lists.newArrayList(new SimpleCondition(RELATION_TYPE, str)))
+                        .build())
         );
         Result<User> result = engine.execute(UserService.getUser(1), conditionList, User.class);
+
+        // demo1 for condition with result operate
+        String conditionStr2 = "LD|MT;O;OL";
+        engine.registerEqualKey(User.class, User::getId);
+        List<String> strList2 = Arrays.asList(conditionStr2.split(RelationConstant.STEP_SEPERATOR));
+        ArrayList<Step<SimpleCondition>> conditionList2 = Lists.newArrayList();
+        strList2.forEach(str -> {
+            if (str.contains("|")) {
+                if (str.contains("|")) {
+                    String[] params = str.split("\\|");
+                    conditionList2.add(
+                            Step.<SimpleCondition>builder()
+                                    .condition(Lists.newArrayList(
+                                            new SimpleCondition(RELATION_TYPE, params[0]),
+                                            new SimpleCondition(RELATION_TYPE, params[1])))
+                                    .operator(Lists.newArrayList(
+                                            CalculateOperateEnum.UNION
+                                    ))
+                                    .build());
+                }
+            } else {
+                conditionList2.add(
+                        Step.<SimpleCondition>builder()
+                                .condition(Lists.newArrayList(new SimpleCondition(RELATION_TYPE, str)))
+                                .build());
+            }
+        });
+        Result<User> result2 = engine.execute(UserService.getUser(1), conditionList2, User.class);
     }
 
     private static DefaultRuleEngine initEngine() {

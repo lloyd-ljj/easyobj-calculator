@@ -14,21 +14,29 @@ public class Target<T> implements Serializable {
 
     private static final long serialVersionUID = -6155751185855179626L;
     
-    private List<T> targetList;
+    private List<T> target;
 
     public Target(T target) {
-        this.targetList = Lists.newArrayList(target);
+        this.target = Lists.newArrayList(target);
     }
 
-    public Target(List<T> targetList) {
-        this.targetList = targetList;
+    public Target(List<T> target) {
+        this.target = target;
     }
 
-    public List<T> getTargetList() {
-        return targetList;
+    public static <T> Target<T> of(T target) {
+        return new Target<>(target);
     }
 
-    public void setTargetList(List<T> targetList) {
-        this.targetList = targetList;
+    public static <T> Target<T> of(List<T> target) {
+        return new Target<>(target);
+    }
+
+    public List<T> getTarget() {
+        return target;
+    }
+
+    public void setTarget(List<T> target) {
+        this.target = target;
     }
 }

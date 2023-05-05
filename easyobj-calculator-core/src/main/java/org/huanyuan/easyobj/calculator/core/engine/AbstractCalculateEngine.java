@@ -6,9 +6,10 @@ import org.huanyuan.easyobj.calculator.core.api.*;
 import org.huanyuan.easyobj.calculator.core.constant.CalculateStatusEnum;
 import org.huanyuan.easyobj.calculator.core.exception.DefaultExceptionHandler;
 import org.huanyuan.easyobj.calculator.core.exception.ExceptionHandler;
-import org.huanyuan.easyobj.calculator.core.exception.NoSuitableRuleException;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.IntStream;
 
 /**
  * @Author lianjunjie
@@ -71,44 +72,63 @@ public abstract class AbstractCalculateEngine implements CalculateEngine {
         }
     }
 
+//    @Override
+//    public <T> void registerEqualJudge(Class<T> clazz, EqualJudge<T> equalJudge) {
+//        this.equalJudgeMap.put(clazz, equalJudge);
+//    }
+
+//    @Override
+//    public void removeEqualJudge(Class clazz) {
+//        this.equalJudgeMap.invalidate(clazz);
+//    }
+//
+//    @Override
+//    public EqualJudge getEqualJudge(Class clazz) {
+//        return this.equalJudgeMap.getIfPresent(clazz);
+//    }
+
+
+    @Override
+    public <T> void registerEqualKey(Class<T> clazz, Function<? super T, ?> keyExtractor) {
+        this.equalKeyMap.put(clazz, keyExtractor);
+    }
+
+    @Override
+    public <T> void removeEqualKey(Class<T> clazz) {
+        this.equalKeyMap.invalidate(clazz);
+    }
+
+    @Override
+    public <T> Function<? super T, ?> getEqualKey(Class<T> clazz) {
+        return this.equalKeyMap.getIfPresent(clazz);
+    }
+
+    @Override
+    public List<Rule> getRule(String type) {
+        return ruleMap.getIfPresent(type);
+    }
+
     abstract <T, V extends Condition, U> void beforeDoExecute(CalculateContext<T, U, V> context);
 
     abstract <T, V extends Condition, U> void afterDoExecute(CalculateContext<T, U, V> context);
 
     private void doExecute(CalculateContext context) {
         context.setStatus(CalculateStatusEnum.RUNNING);
-        for (Step step : (List<Step>) context.getStepList()) {
+        LogicCalculator logicCalculator = new LogicCalculator(this);
+        IntStream.range(0, context.getStepList().size()).forEach(idx -> {
+            context.setCurrentStep(idx);
             if (CalculateStatusEnum.ERROR.equals(context.getStatus())) {
                 return;
             }
-            List<Rule> ruleList = ruleMap.getIfPresent(step.getType());
-            if (CollectionUtil.isEmpty(ruleList)) {
-                context.setStatus(CalculateStatusEnum.RUNNING);
-                return;
-            }
-            boolean rulePassFlag = false;
-            for (Rule rule : ruleList) {
-                try {
-                    if (rule.evaluate(step.getCondition())) {
-                        Result result = rule.execute(context.getTarget(), step.getCondition());
-                        context.setResult(result);
-                        context.setTarget(new Target(result.getResultList()));
-                        context.setCurrentStep(context.getCurrentStep() + 1);
-                        rulePassFlag = true;
-                        break;
-                    }
-                } catch (Exception e) {
-                    context.setStatus(CalculateStatusEnum.ERROR);
-                    exceptionHandler.handle(context, e);
-                    return;
-                }
-
-            }
-            if (!rulePassFlag) {
+            try {
+                Result result = logicCalculator.calculate(context);
+                context.setTarget(Target.of(result.getResult()));
+                context.setResult(result);
+            } catch (Exception e) {
                 context.setStatus(CalculateStatusEnum.ERROR);
-                exceptionHandler.handle(context, new NoSuitableRuleException(step));
+                exceptionHandler.handle(context, e);
             }
-        }
+        });
         context.setStatus(CalculateStatusEnum.END);
     }
 

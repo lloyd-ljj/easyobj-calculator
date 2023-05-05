@@ -19,8 +19,11 @@ public class Condition implements Serializable{
 
     protected Map<R<?>, Object> condition;
 
-    public Condition() {
+    protected String ruleType = Rule.DEFAULT_TYPE;
+
+    public Condition(String ruleType) {
         this.condition = Maps.newConcurrentMap();
+        this.ruleType = ruleType;
     }
 
     public <T> T put(R<T> r, T value) {
@@ -38,4 +41,7 @@ public class Condition implements Serializable{
         return (T) condition.get(r);
     }
 
+    public String getRuleType() {
+        return ruleType;
+    }
 }

@@ -14,21 +14,25 @@ public class Result<T> implements Serializable {
 
     private static final long serialVersionUID = -460089896446118266L;
 
-    private List<T> resultList;
+    private List<T> result;
 
     public Result(T result) {
-        this.resultList = Lists.newArrayList(result);
+        this.result = Lists.newArrayList(result);
     }
 
     public Result(List<T> result) {
-        this.resultList = result;
+        this.result = result;
     }
 
-    public List<T> getResultList() {
-        return resultList;
+    public static <T> Result<T> of(T result) {
+        return new Result<>(result);
     }
 
-    public void setResultList(List<T> resultList) {
-        this.resultList = resultList;
+    public static <T> Result<T> of(List<T> result) {
+        return new Result<>(result);
+    }
+
+    public List<T> getResult() {
+        return result;
     }
 }

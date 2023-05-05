@@ -12,6 +12,12 @@ public class DefaultExceptionHandler implements ExceptionHandler{
 
     @Override
     public <T, U, V extends Condition> void handle(CalculateContext<T, U, V> context, Throwable e) {
+        if (e instanceof NoSuitableRuleException) {
+            throw (NoSuitableRuleException) e;
+        }
+        if (e instanceof CalculatorException) {
+            throw (CalculatorException) e;
+        }
         throw new CalculatorException(e);
     }
 }

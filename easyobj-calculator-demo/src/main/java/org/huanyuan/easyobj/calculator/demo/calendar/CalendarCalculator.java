@@ -48,10 +48,14 @@ public class CalendarCalculator {
         engine.registerRule(CALENDAR_TYPE, Lists.newArrayList(dayMinusRule, dayPlusRule));
 
         ArrayList<Step<SimpleCondition>> step = Lists.newArrayList(
-                Step.<SimpleCondition>builder().type(CALENDAR_TYPE).condition(new SimpleCondition("DAYPLUS10")).build(),
-                Step.<SimpleCondition>builder().type(CALENDAR_TYPE).condition(new SimpleCondition("DAYMINUS5")).build()
+                Step.<SimpleCondition>builder()
+                        .condition(Lists.newArrayList(new SimpleCondition(CALENDAR_TYPE, "DAYPLUS10")))
+                        .build(),
+                Step.<SimpleCondition>builder()
+                        .condition(Lists.newArrayList(new SimpleCondition(CALENDAR_TYPE, "DAYMINUS5")))
+                        .build()
                 );
-        List<Calendar> resultList = engine.execute(Calendar.getInstance(), step, Calendar.class).getResultList();
+        List<Calendar> resultList = engine.execute(Calendar.getInstance(), step, Calendar.class).getResult();
         Assert.equals(resultList.size(), 1);
         System.out.println();
     }

@@ -29,7 +29,7 @@ public class DefaultRule<T, U, V extends Condition> extends AbstractRule<T, U, V
     @Override
     public Result<U> execute(Target<T> target, V condition) throws Exception {
         List<U> resultList = Lists.newArrayList();
-        for (T t : target.getTargetList()) {
+        for (T t : target.getTarget()) {
             resultList.addAll(action.calculate(t, condition));
         }
         return new Result<>(resultList);

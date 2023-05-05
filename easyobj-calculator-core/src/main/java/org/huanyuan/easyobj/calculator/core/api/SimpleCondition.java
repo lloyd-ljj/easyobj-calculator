@@ -13,9 +13,13 @@ public class SimpleCondition extends Condition {
 
     private static final String DEFAULT_CONTENT_NAME = "DEFAULT_CONTENT_NAME";
 
-    public SimpleCondition(String condition) {
-        super();
+    public SimpleCondition(String ruleType, String condition) {
+        super(ruleType);
         this.condition.put(R.<String>of(DEFAULT_CONTENT_NAME), condition);
+    }
+
+    public static SimpleCondition of(String ruleType, String condition) {
+        return new SimpleCondition(ruleType, condition);
     }
 
     public String get() {

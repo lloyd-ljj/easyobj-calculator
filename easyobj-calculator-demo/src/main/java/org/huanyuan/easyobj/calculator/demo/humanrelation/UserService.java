@@ -17,6 +17,8 @@ public class UserService {
             .put(3, new User(3, 4, 5, 2, "bob", "3333333", 1))
             .put(4, new User(4, 5, 5, 3, "betty", "4444444", 0))
             .put(5, new User(5, 5, 5, 3,"andy", "5555555", 1))
+
+            .put(6, new User(6, 4, 4, 3,"jerry", "666666", 1))
             .build();
 
     public static User getUser(Integer id) {
